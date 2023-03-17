@@ -84,5 +84,8 @@ while True:
     if ball.xcor() > 390:
         ball.goto(0, 0)
         ball.dx *= -1
+        
+    if ball.xcor() < -390:
+        ball.goto(0, 0)
+        ball.dx *= -1
     
-
