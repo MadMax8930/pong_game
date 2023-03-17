@@ -4,7 +4,7 @@ window = turtle.Screen()
 window.title("Pong by @Max")
 window.bgcolor("black")
 window.setup(width=800, height=600)
-window.tracer(0)        #Stop the window from updating (gotta do manually)
+window.tracer(0)        #Stop the window from updating
 
 
 # Paddle A
@@ -32,6 +32,8 @@ ball.shape("square")
 ball.color("white")
 ball.penup()
 ball.goto(0, 0)
+ball.dx = 2       #Ball movement by 2 pxiels diagonally
+ball.dy = 2
 
 # Function
 def paddle_a_up():
@@ -58,11 +60,25 @@ def paddle_b_down():
 window.listen()            #Listen for keyboard input
 window.onkeypress(paddle_a_up, "z")
 window.onkeypress(paddle_a_down, "s")
-
+window.onkeypress(paddle_b_up, "Up")
+window.onkeypress(paddle_b_down, "Down")
 
 
 # Main game loop
 while True:
     window.update()        #Everytime the loop runs it updates the screen
+    
+    # Move the ball
+    ball.setx(ball.xcor() + ball.dx)
+    ball.sety(ball.ycor() + ball.dy)
+    
+    # Border checking
+    if ball.ycor() > 290:
+        ball.sety(290)
+        ball.dy *= -1
+        
+    if ball.ycor() < -290:
+        ball.sety(-290)
+        ball.dy *= -1
     
 
